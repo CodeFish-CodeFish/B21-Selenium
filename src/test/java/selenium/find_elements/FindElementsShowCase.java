@@ -55,12 +55,40 @@ public class FindElementsShowCase {
         for (int i = 1; i < allLinks.size(); i++) {
 
             Thread.sleep(400);
-            if (allLinks.get(i).getText().equalsIgnoreCase("Hovers")){
+            if (allLinks.get(i).getText().equalsIgnoreCase("Hovers")) {
                 allLinks.get(i).click();
                 break;
             }
 
         }
+
+    }
+
+    @Test
+    public void codeFishWebPage() {
+
+        driver.get("https://codefish.io/");
+        List<WebElement> allText = driver.findElements(By.xpath("//div[@class='gradient-block']//p"));
+        /*
+        1. Create empty List of String
+        2. Store each text from webElement in this empty list of string
+        3. Print this list of string in the console
+        4. User for loop traditional or enhanced for loop
+
+        TIP: user for loop/enhanced for loop
+         */
+
+
+        List<String> textFromWebElement = new ArrayList<>();
+
+        for (int i = 0; i < allText.size(); i++) {
+
+            textFromWebElement.add(allText.get(i).getText());
+
+        }
+        System.out.println(textFromWebElement);
+
+
 
     }
 
