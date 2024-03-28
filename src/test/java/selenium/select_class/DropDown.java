@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class DropDown {
 
@@ -49,8 +50,27 @@ public class DropDown {
         driver.findElement(By.xpath("//a[.='Select Dropdown List']")).click();
 
         WebElement dropdown = driver.findElement(By.xpath("//select[@id='select-demo']"));
+
         Select select = new Select(dropdown);
-        select.selectByVisibleText("Saturday");
+        // select.selectByVisibleText("Saturday");
+//        select.selectByValue("Friday");
+
+
+        WebElement firstSelectedOption = select.getFirstSelectedOption();
+        String str =  firstSelectedOption.getText();
+        System.out.println(str);
+        select.selectByIndex(6);
+
+        List<WebElement> optionsFromDropdown = select.getOptions();
+
+        for (int i = 0; i < optionsFromDropdown.size(); i++) {
+
+            if (optionsFromDropdown.get(i).getText().equalsIgnoreCase("tuesday")){
+                optionsFromDropdown.get(i).click();
+            }
+
+        }
+
 
     }
 
@@ -105,9 +125,6 @@ public class DropDown {
 
         WebElement submitBtn = driver.findElement(By.xpath("//button[.='Submit']"));
         submitBtn.click();
-
-
-
 
 
     }

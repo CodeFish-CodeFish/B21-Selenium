@@ -9,6 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
 
 public class LambdaTest {
@@ -22,6 +23,7 @@ public class LambdaTest {
         driver = new ChromeDriver();
         driver.get("https://www.lambdatest.com/selenium-playground/drag-drop-range-sliders-demo");
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Test
