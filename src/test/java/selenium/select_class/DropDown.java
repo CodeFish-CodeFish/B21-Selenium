@@ -10,7 +10,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DropDown {
 
@@ -57,7 +59,7 @@ public class DropDown {
 
 
         WebElement firstSelectedOption = select.getFirstSelectedOption();
-        String str =  firstSelectedOption.getText();
+        String str = firstSelectedOption.getText();
         System.out.println(str);
         select.selectByIndex(6);
 
@@ -65,7 +67,7 @@ public class DropDown {
 
         for (int i = 0; i < optionsFromDropdown.size(); i++) {
 
-            if (optionsFromDropdown.get(i).getText().equalsIgnoreCase("tuesday")){
+            if (optionsFromDropdown.get(i).getText().equalsIgnoreCase("tuesday")) {
                 optionsFromDropdown.get(i).click();
             }
 
@@ -104,10 +106,10 @@ public class DropDown {
 
         WebElement countryDropdown = driver.findElement(By.xpath("//select[@name='country']"));
         Select select = new Select(countryDropdown);
-        select.selectByVisibleText("New Zealand");
+        select.selectByValue("GB");
 
         //New Zealand
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         WebElement city = driver.findElement(By.xpath("//input[@id='inputCity']"));
         city.sendKeys("Chitown");
 
@@ -128,6 +130,73 @@ public class DropDown {
 
 
     }
+
+    @Test
+    public void task2() {
+        driver.get("https://www.lambdatest.com/selenium-playground/");
+        /*
+        1. Navigate to lambda web page
+        2. Click on Table Pagination
+        3. Select 'Show All Rows'
+        4. Store firstName and email in Map as key=value
+        5. Print that Map, close your driver
+
+        store data in Map interface
+        ex:
+        Key=value
+        firstName=email
+        Roland=r.lloyd@randatmail.com
+         */
+
+        driver.findElement(By.xpath("//a[.='Table Pagination']")).click();
+
+        WebElement dropdown = driver.findElement(By.id("maxRows"));
+        Select select = new Select(dropdown);
+        select.selectByIndex(0);
+
+        List<WebElement> firstNames = driver.findElements(By.xpath("//tr//td[2]"));
+        List<WebElement> emails = driver.findElements(By.xpath("//tr//td[4]"));
+
+        Map<String, String> map = new HashMap<>();
+
+        for (int i = 0; i < firstNames.size(); i++) {
+
+//            String name = firstNames.get(i).getText(); // getting each firstName and storing in a temp string
+//            String email = emails.get(i).getText(); // getting each email and storing in a temp string
+//
+//            map.put(name, email);
+
+            map.put(firstNames.get(i).getText(), emails.get(i).getText());
+
+        }
+
+        System.out.println(map);
+
+        /*
+        Create another Map and store lastName and phone numbers as key=value
+        ex:
+          key=value
+        Lloyd=428-0863-03
+         */
+
+        List<WebElement> lastNames = driver.findElements(By.xpath("//tr//td[3]"));
+        List<WebElement> phoneNumbers = driver.findElements(By.xpath("//tr//td[5]"));
+
+
+        Map<String, String> info = new HashMap<>();
+
+        for (int i = 0; i < lastNames.size(); i++) {
+
+            info.put(lastNames.get(i).getText(),phoneNumbers.get(i).getText());
+
+        }
+        System.out.println(info);
+
+
+
+
+    }
+
 
     @AfterMethod
     public void tearDown() throws InterruptedException {
