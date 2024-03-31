@@ -192,6 +192,22 @@ public class DropDown {
         }
         System.out.println(info);
 
+        String str = "kkubaa"; // k=1, u=1, b=1, a=2
+        Map<Character, Integer> letterCount = new HashMap<>();
+
+        for (int i = 0; i < str.length(); i++) {
+
+            if (!letterCount.containsKey(str.charAt(i))){
+                letterCount.put(str.charAt(i), 1);
+            }else {
+                int value = letterCount.get(str.charAt(i));
+                letterCount.put(str.charAt(i), value+1);
+            }
+
+        }
+        System.out.println(letterCount.get("k"));//
+
+
 
 
 

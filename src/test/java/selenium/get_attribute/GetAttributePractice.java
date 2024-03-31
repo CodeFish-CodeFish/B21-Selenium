@@ -42,7 +42,7 @@ public class GetAttributePractice {
 
         WebElement nameInput = driver.findElement(By.xpath("//input[@name='name']"));
 
-        String placeHolderName = nameInput.getAttribute("placeholder");
+        String placeHolderName = nameInput.getAttribute("placeholder");// name?
         System.out.println(placeHolderName);
 
         WebElement email = driver.findElement(By.xpath("//input[@name='email']"));
