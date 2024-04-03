@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import selenium.utils.BrowserUtils;
 import selenium.utils.DriverHelper;
 
 import java.time.Duration;
@@ -28,8 +29,10 @@ public class PopUps {
         WebElement jsAlert = driver.findElement(By.xpath("//button[.='Click for JS Alert']"));
         jsAlert.click();
 
-        Alert alert = driver.switchTo().alert(); // we are switching our driver into the popup/alert
-        alert.accept(); // driver clicks ok button on alert
+        BrowserUtils.acceptAlert(driver);
+
+//        Alert alert = driver.switchTo().alert(); // we are switching our driver into the popup/alert
+//        alert.accept(); // driver clicks ok button on alert
 
         WebElement successMessage = driver.findElement(By.xpath("//p[@id='result']"));
         Assert.assertEquals(successMessage.getText(), "You successfully clicked an alert", "Failed to validate alert text");
@@ -43,8 +46,9 @@ public class PopUps {
         WebElement jsConfirm = driver.findElement(By.xpath("//button[.='Click for JS Confirm']"));
         jsConfirm.click();
         Thread.sleep(2000);
-        Alert alert = driver.switchTo().alert(); // we are switching our driver into the popup/alert
-        alert.dismiss(); // driver clicks cancel button on alert
+        BrowserUtils.dismissAlert(driver);
+//        Alert alert = driver.switchTo().alert(); // we are switching our driver into the popup/alert
+//        alert.dismiss(); // driver clicks cancel button on alert
 
         WebElement successMessage = driver.findElement(By.xpath("//p[@id='result']"));
         Assert.assertEquals(successMessage.getText(), "You clicked: Cancel", "Failed to validate alert text");
@@ -52,10 +56,12 @@ public class PopUps {
         WebElement jsPrompt = driver.findElement(By.xpath("//button[.='Click for JS Prompt']"));
         jsPrompt.click();
 
-        alert.sendKeys("CodeFish SDET Program");
-        String jsAlertText = alert.getText();
+        BrowserUtils.sendKeysAlert(driver,"CodeFish SDET Program");
+        //alert.sendKeys("CodeFish SDET Program");
+        String jsAlertText = BrowserUtils.getTextAlert(driver);
         System.out.println(jsAlertText);
-        alert.accept();
+        BrowserUtils.acceptAlert(driver);
+        //alert.accept();
     }
 
     @Test
@@ -65,9 +71,11 @@ public class PopUps {
         WebElement preview1 = driver.findElement(By.xpath("//h5[contains(.,'Normal alert')]//..//button"));
         preview1.click();
 
-        Alert alert = driver.switchTo().alert(); //switching the driver into the popped up alert
-        System.out.println(alert.getText());//gets the text on alert popup
-        alert.accept(); // clicks ok
+//        Alert alert = driver.switchTo().alert(); //switching the driver into the popped up alert
+//        System.out.println(alert.getText());//gets the text on alert popup
+//        alert.accept(); // clicks ok
+        System.out.println(BrowserUtils.getTextAlert(driver));
+        BrowserUtils.acceptAlert(driver);
 
 
         Thread.sleep(2000);

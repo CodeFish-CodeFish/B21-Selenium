@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import selenium.utils.BrowserUtils;
+import selenium.utils.ConfigReader;
+import selenium.utils.DriverHelper;
 
 import java.time.Duration;
 
@@ -16,8 +18,9 @@ public class UploadFile {
     @Test
     public void uploadAFile() {
 
+
         WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/upload");
+        driver.get(ConfigReader.readProperty("heroKaupURL"));
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 

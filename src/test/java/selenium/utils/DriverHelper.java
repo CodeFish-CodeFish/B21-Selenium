@@ -22,6 +22,8 @@ public class DriverHelper {
     private DriverHelper(){} // private constructor - the main reason for making
                             // the constructor private is that we do not need to create object from this class
 
+
+    // if you performing parrallel test
     public static WebDriver getDriver(){
         // Will check if there are any active drivers
         if (driver == null || ((RemoteWebDriver)driver).getSessionId()==null){
