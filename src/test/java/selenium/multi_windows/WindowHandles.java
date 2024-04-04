@@ -40,7 +40,6 @@ public class WindowHandles {
                 driver.switchTo().window(id);
                 break;
             }
-
         }
 
         System.out.println(driver.getTitle());
