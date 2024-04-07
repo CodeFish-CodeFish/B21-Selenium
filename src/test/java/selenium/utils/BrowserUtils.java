@@ -1,8 +1,7 @@
 package selenium.utils;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -97,6 +96,87 @@ public class BrowserUtils {
         }
 
     }
+
+    public static void dragAndDrop(WebDriver driver, WebElement pickUp, WebElement dropOff){
+
+        Actions actions = new Actions(driver);
+        actions.dragAndDrop(pickUp, dropOff).build().perform();
+
+    }
+    public static void clickHoldDrop(WebDriver driver, WebElement pickUp, WebElement dropOff){
+
+        Actions actions = new Actions(driver);
+        actions.clickAndHold(pickUp).moveToElement(dropOff).release().build().perform();
+
+    }
+
+    public static void sendKeysWithActions(WebDriver driver,WebElement element, String keys){
+        Actions actions = new Actions(driver);
+        actions.sendKeys(element, keys).perform();
+    }
+
+    // method overloading --> example of polymorphism
+    public static void clickWithActions(WebDriver driver, WebElement element){
+
+        Actions actions = new Actions(driver);
+        actions.click(element).build().perform();
+    }
+
+    public static void clickWithActions(WebDriver driver, int deltaX, int deltaY){
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(deltaX, deltaY).click().build().perform();
+    }
+
+    public static void hoverOver(WebDriver driver, WebElement element){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).build().perform();
+    }
+
+    public static void scroller(WebDriver driver, WebElement element){
+
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(element).build().perform();
+
+    }
+
+    public static String getTitleWithJS(WebDriver driver){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return js.executeScript("return document.title").toString();
+    }
+
+    public static void clickWithJS(WebDriver driver, WebElement element){
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click()", element);
+    }
+
+    public static void scrollWithJS(WebDriver driver, WebElement element){
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true)", element);
+
+    }
+
+    public static void scrollWithPointJS(WebDriver driver, WebElement element){
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Point point = element.getLocation();
+        int x = point.getX();
+        int y = point.getY();
+
+        js.executeScript("window.scrollTo(" + x + "," + y + ")");
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 

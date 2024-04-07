@@ -5,10 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import selenium.utils.BaseTest;
+import selenium.utils.TestBase;
 import selenium.utils.BrowserUtils;
 
-public class DragAndDropPractice extends BaseTest {
+public class DragAndDropPractice extends TestBase {
 
 
     @Test
@@ -41,36 +41,36 @@ public class DragAndDropPractice extends BaseTest {
     public void dragAndDropTask1() throws InterruptedException {
 
         driver.get("https://www.lambdatest.com/selenium-playground/drag-and-drop-demo");
-        Actions actions = new Actions(driver);
-
         WebElement draggable1 = driver.findElement(By.xpath("//span[.='Draggable 1']"));
         WebElement draggable2 = driver.findElement(By.xpath("//span[.='Draggable 2']"));
-
-
         WebElement dropArea = driver.findElement(By.id("mydropzone"));
-        actions.clickAndHold(draggable1).moveToElement(dropArea).release().perform();
-        actions.clickAndHold(draggable2).moveToElement(dropArea).release().perform();
-
+        BrowserUtils.clickHoldDrop(driver, draggable1, dropArea);
+        BrowserUtils.clickHoldDrop(driver, draggable2, dropArea);
         WebElement droppedListText = driver.findElement(By.id("droppedlist"));
-
         System.out.println(BrowserUtils.getText(droppedListText));
-
         Thread.sleep(3000);
-
         WebElement draggable = driver.findElement(By.id("draggable"));
         WebElement droppable = driver.findElement(By.id("droppable"));
-
-        actions.dragAndDrop(draggable, droppable).perform();
-
+        BrowserUtils.dragAndDrop(driver, draggable, droppable);
         //refresh, reassignment.
         droppable = driver.findElement(By.id("droppable")); // avoiding staleElementReferenceException
-
-
         String backgroundColor = droppable.getCssValue("color"); // it could give me stale
         System.out.println(backgroundColor);
 
 
 
+    }
+
+    @Test
+    public void dragAndDropWithOffSet(){
+        driver.get("https://www.lambdatest.com/selenium-playground/drag-and-drop-demo");
+        WebElement draggable = driver.findElement(By.id("draggable"));
+        WebElement droppable = driver.findElement(By.id("droppable"));
+        Actions actions = new Actions(driver);
+        actions.clickAndHold(draggable).moveByOffset(0, -500).release().build().perform();
+
+
+//        actions.moveByOffset(0, 500).click().perform();
     }
 
     @Test

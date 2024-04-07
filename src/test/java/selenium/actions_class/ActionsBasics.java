@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
-import selenium.utils.BaseTest;
+import selenium.utils.TestBase;
 import selenium.utils.BrowserUtils;
 
 // OOP concept Inheritance
-public class ActionsBasics extends BaseTest{
+public class ActionsBasics extends TestBase {
 
     @Test
     public void contextClick(){
