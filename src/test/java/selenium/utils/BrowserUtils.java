@@ -1,11 +1,14 @@
 package selenium.utils;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Set;
 
@@ -39,6 +42,12 @@ public class BrowserUtils {
 
     //Return text from WebElement
     public static String getText(WebElement element) {
+        return element.getText().trim();
+    }
+
+    public static String getText(WebElement element, WebDriver driver){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(element));
         return element.getText().trim();
     }
 
@@ -165,6 +174,31 @@ public class BrowserUtils {
         int y = point.getY();
 
         js.executeScript("window.scrollTo(" + x + "," + y + ")");
+
+    }
+
+    public static void takeScreenshot(WebDriver driver){
+
+        // Whenever you use this method please provide ITestResult interface in method parameters
+
+        File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        String location = System.getProperty("user.dir") + "/src/main/screenshots/";
+
+        File directory = new File(location);
+
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+
+        try {
+            FileUtils.copyFile(file, new File(location + System.currentTimeMillis() + ".png"));
+        }catch (IOException e){
+
+            throw new RuntimeException(e);
+
+        }
+
+
 
     }
 

@@ -21,10 +21,11 @@ public class ExplicitWaits extends TestBase {
 
         WebElement text = driver.findElement(By.xpath("//h4[.='Hello World!']"));
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(text));
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        wait.until(ExpectedConditions.visibilityOf(text));
 
-        System.out.println(BrowserUtils.getText(text));
+
+        System.out.println(BrowserUtils.getText(text, driver));
     }
 
 }
