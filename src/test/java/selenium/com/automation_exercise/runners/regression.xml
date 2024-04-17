@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="TestAutomation">
+    <test name="RegressionAutomationExercise">
+
+
+        <classes>
+
+            <class name="selenium.com.automation_exercise.tests.AutomationTests"></class>
+
+
+        </classes>
+
+    </test>
+</suite>

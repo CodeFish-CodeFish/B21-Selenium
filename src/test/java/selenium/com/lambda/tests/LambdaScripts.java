@@ -1,5 +1,6 @@
 package selenium.com.lambda.tests;
 
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import selenium.com.lambda.pages.AjaxDemoPage;
 import selenium.com.lambda.pages.LambdaMainPage;
@@ -7,8 +8,9 @@ import selenium.utils.TestBase;
 
 public class LambdaScripts extends TestBase {
 
+    @Parameters({"testName","testMessage"})
     @Test
-    public void LB_TC_01(){
+    public void LB_TC_01(String testName, String testMessage){
 
         driver.get("https://www.lambdatest.com/selenium-playground/");
 
@@ -18,7 +20,7 @@ public class LambdaScripts extends TestBase {
         // driver.findElement
 
         AjaxDemoPage demoPage = new AjaxDemoPage(driver);
-        demoPage.fillInBlanks("test", "message goes here");
+        demoPage.fillInBlanks(testName, testMessage);
 
     }
 

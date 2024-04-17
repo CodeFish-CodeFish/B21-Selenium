@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Regression Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="UI Regression(failed)">
+    <parameter name="testMessage" value="Message_test"/>
+    <parameter name="subject" value="subject message test"/>
+    <parameter name="name" value="Kobe"/>
+    <parameter name="message" value="Message body goes here"/>
+    <parameter name="email" value="test@test.com"/>
+    <parameter name="testName" value="KobeTest"/>
+    <classes>
+      <class name="selenium.com.luma.tests.LumaTests">
+        <methods>
+          <include name="tearDown"/>
+          <include name="initializeDriver"/>
+          <include name="luma_tc_02" invocation-numbers="2 3"/>
+        </methods>
+      </class> <!-- selenium.com.luma.tests.LumaTests -->
+    </classes>
+  </test> <!-- UI Regression(failed) -->
+</suite> <!-- Failed suite [Regression Suite] -->

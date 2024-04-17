@@ -17,8 +17,8 @@ public class TestBase {
     @AfterMethod
     public void tearDown() throws InterruptedException {
         Thread.sleep(4000);
-//         ITestResult result
-//        if (!result.isSuccess()){
+//         ITestResult result <-- this Interface needs to be passed into tearDown method parameters
+//        if (!result.isSuccess()){ // uncomment this 'if' condition if needed
 //            BrowserUtils.takeScreenshot(driver);
 //        }
 
